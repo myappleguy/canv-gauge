@@ -690,7 +690,7 @@ var Gauge = function( config) {
       rIn  = max / 100 * 77,
       rOut = max / 100 * 20,
       pad1 = max / 100 * 4,
-      pad2 = max / 100 * 2,
+      pad2 = max / 100 * 2
 
     ;
 
