@@ -1,7 +1,7 @@
 /**!
  * @license
  * HTML5 Canvas Gauge implementation
- * 
+ *
  * This code is subject to MIT license.
  *
  * Copyright (c) 2012 Mykhailo Stadnyk <mikhus@gmail.com>
@@ -12,17 +12,17 @@
  * copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the
  * Software, and to permit persons to whom the Software is furnished to do so,
  * subject to the following conditions:
- * 
+ *
  * The above copyright notice and this permission notice shall be included in all
  * copies or substantial portions of the Software.
- * 
+ *
  * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
  * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS
  * FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR
  * COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER
  * IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
  * CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
- * 
+ *
  * @authors: Mykhailo Stadnyk <mikhus@gmail.com>
  *           Chris Poile <poile@edwards.usask.ca>
  *           Luca Invernizzi <http://www.lucainvernizzi.net>
@@ -66,7 +66,8 @@ var Gauge = function( config) {
 			title      : '#888',
 			units      : '#888',
 			numbers    : '#444',
-			needle     : { start : 'rgba(240, 128, 128, 1)', end : 'rgba(255, 160, 122, .9)' }
+			needle     : { start : 'rgba(240, 128, 128, 1)', end : 'rgba(255, 160, 122, .9)' },
+      needleShadow: 'rgba(188, 143, 143, 0.45)'
 		},
 		highlights  : [{
 			from  : 20,
@@ -93,7 +94,7 @@ var Gauge = function( config) {
 
 	/**
 	 * Sets a new value to gauge and updates the gauge view
-	 * 
+	 *
 	 * @param {number} val  - the new value to set to the gauge
 	 * @return {Gauge} this - returns self
 	 */
@@ -106,7 +107,7 @@ var Gauge = function( config) {
 		toValue = val > config.maxValue ?
 			config.maxValue + dv :
 				val < config.minValue ?
-					config.minValue - dv : 
+					config.minValue - dv :
 						val
 		;
 
@@ -116,11 +117,11 @@ var Gauge = function( config) {
 
 		return this;
 	};
-	
+
 	/**
 	 * Sets a new value to gauge and updates the gauge view without
 	 * any animation (even if configured)
-	 * 
+	 *
 	 * @param {number} val  - the new value to set to the gauge
 	 * @return {Gauge} this - returns self
 	 */
@@ -142,7 +143,7 @@ var Gauge = function( config) {
 
 	/**
 	 * Returns the current value been set to the gauge
-	 * 
+	 *
 	 * @return {number} value - current gauge's value
 	 */
 	this.getValue = function() {
@@ -153,7 +154,7 @@ var Gauge = function( config) {
 	 * Ready event for the gauge. Use it whenever you
 	 * initialize the gauge to be assured it was fully drawn
 	 * before you start the update on it
-	 * 
+	 *
 	 * @event {Function} onready
 	 */
 	this.onready = function() {};
@@ -174,7 +175,7 @@ var Gauge = function( config) {
 	};
 
 	applyRecursive( this.config, config);
-	
+
 	this.config.minValue = parseFloat( this.config.minValue);
         this.config.maxValue = parseFloat( this.config.maxValue);
 
@@ -202,7 +203,7 @@ var Gauge = function( config) {
 		CX  = CW / 2;
 		CY  = CH / 2;
 		max = CX < CY ? CX : CY;
-		
+
 		cache.i8d = false;
 
 		// translate cache to have 0, 0 in center
@@ -255,7 +256,7 @@ var Gauge = function( config) {
 	var animateInterval = null;
 
 	function _animate( opts) {
-		var start = new Date; 
+		var start = new Date;
 
 		animateInterval = setInterval( function() {
 			var
@@ -303,7 +304,7 @@ var Gauge = function( config) {
 	/**
 	 * Drows the gauge. Normally this function should be used to
 	 * initally draw the gauge
-	 * 
+	 *
 	 * @return {Gauge} this - returns the self Gauge object
 	 */
 	this.draw = function() {
@@ -374,8 +375,8 @@ var Gauge = function( config) {
 	 * Linear gradient
 	 */
 	function lgrad( clrFrom, clrTo, len) {
-		var grad = ctx.createLinearGradient( 0, 0, 0, len);  
-		grad.addColorStop( 0, clrFrom);  
+		var grad = ctx.createLinearGradient( 0, 0, 0, len);
+		grad.addColorStop( 0, clrFrom);
 		grad.addColorStop( 1, clrTo);
 
 		return grad;
@@ -414,7 +415,7 @@ var Gauge = function( config) {
 		ctx.arc( 0, 0, r2, 0, Math.PI * 2, true);
 		ctx.fillStyle = lgrad( '#eee', '#f0f0f0', r2);
 		ctx.fill();
-	
+
 		ctx.beginPath();
 		ctx.arc( 0, 0, r3, 0, Math.PI * 2, true);
 		ctx.fillStyle = config.colors.plate;
@@ -497,7 +498,7 @@ var Gauge = function( config) {
 			ctx.arc( 0, 0, r, radians( 45), radians( 315), false);
 			ctx.stroke();
 			ctx.restore();
-	
+
 			ctx.save();
 		}
 	};
@@ -532,7 +533,7 @@ var Gauge = function( config) {
 		var r = max / 100 * 55;
 
 		for (var i = 0; i < config.majorTicks.length; ++i) {
-			var 
+			var
 				a = 45 + i * (270 / (config.majorTicks.length - 1)),
 				p = rpoint( r, radians( a))
 			;
@@ -586,7 +587,7 @@ var Gauge = function( config) {
 
 		if (cdec > 0) {
 			val = val.toFixed( cdec).toString().split( '.');
-	
+
 			for (var i = 0, s = cint - val[0].length; i < s; ++i) {
 				val[0] = '0' + val[0];
 			}
@@ -606,7 +607,7 @@ var Gauge = function( config) {
 	};
 
 	function rpoint( r, a) {
-		var 
+		var
 			x = 0, y = r,
 
 			sin = Math.sin( a),
@@ -633,42 +634,42 @@ var Gauge = function( config) {
 				sa = radians( 45 + (hlt.from - config.minValue) / vd),
 				ea = radians( 45 + (hlt.to - config.minValue) / vd)
 			;
-			
+
 			ctx.beginPath();
-	
+
 			ctx.rotate( radians( 90));
 			ctx.arc( 0, 0, r1, sa, ea, false);
 			ctx.restore();
 			ctx.save();
-	
+
 			var
 				ps = rpoint( r2, sa),
 				pe = rpoint( r1, sa)
 			;
 			ctx.moveTo( ps.x, ps.y);
 			ctx.lineTo( pe.x, pe.y);
-	
+
 			var
 				ps1 = rpoint( r1, ea),
 				pe1 = rpoint( r2, ea)
 			;
-	
+
 			ctx.lineTo( ps1.x, ps1.y);
 			ctx.lineTo( pe1.x, pe1.y);
 			ctx.lineTo( ps.x, ps.y);
-	
+
 			ctx.closePath();
-	
+
 			ctx.fillStyle = hlt.color;
 			ctx.fill();
-	
+
 			ctx.beginPath();
 			ctx.rotate( radians( 90));
 			ctx.arc( 0, 0, r2, sa - 0.2, ea + 0.2, false);
 			ctx.restore();
-	
+
 			ctx.closePath();
-	
+
 			ctx.fillStyle = config.colors.plate;
 			ctx.fill();
 			ctx.save();
@@ -690,14 +691,14 @@ var Gauge = function( config) {
 				ctx.shadowOffsetX = 2;
 				ctx.shadowOffsetY = 2;
 				ctx.shadowBlur    = 10;
-				ctx.shadowColor   = 'rgba(188, 143, 143, 0.45)';
+				ctx.shadowColor   = config.colors.needleShadow;
 			}
 		;
-		
+
 		shad();
-		
+
 		ctx.save();
-		
+
 		if (fromValue < 0) {
 			fromValue = Math.abs(config.minValue - fromValue);
 		} else if (config.minValue > 0) {
@@ -774,7 +775,7 @@ var Gauge = function( config) {
 	// value box draw
 	function drawValueBox() {
 		ctx.save();
-		
+
 		ctx.font = 40 * (max / 200) + "px Led";
 
 		var
@@ -816,7 +817,7 @@ var Gauge = function( config) {
 
 		ctx.fillStyle = "#babab2";
 		ctx.fill();
-		
+
 		ctx.restore();
 
 		ctx.shadowOffsetX = 0.004 * max;
