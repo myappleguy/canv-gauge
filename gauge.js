@@ -386,10 +386,10 @@ var Gauge = function( config) {
       r0 = max / 100 * 93,
       d0 = max -r0,
       r1 = max / 100 * 91,
-        d1 = max - r1,
-        r2 = max / 100 * 88,
-          d2 = max - r2,
-          r3 = max / 100 * 85;
+      d1 = max - r1,
+      r2 = max / 100 * 88,
+      d2 = max - r2,
+      r3 = max / 100 * 85;
 
     ctx.save();
 
@@ -537,6 +537,12 @@ var Gauge = function( config) {
         a = 45 + i * (270 / (config.majorTicks.length - 1)),
         p = rpoint( r, radians( a))
           ;
+
+      if (config.glow) {
+        ctx.shadowBlur  = d0;
+        //ctx.shadowColor = 'rgba(0, 0, 0, 0.5)';
+        ctx.shadowColor = config.colors.shadowColor;
+      }
 
       ctx.font      = 20 * (max / 200) + "px Arial";
       ctx.fillStyle = config.colors.numbers;
