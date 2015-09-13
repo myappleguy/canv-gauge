@@ -90,13 +90,7 @@ var Gauge = function( config) {
     fromValue = 0,
       toValue   = 0,
       imready   = false
-      shad = function() {
-        ctx.shadowOffsetX = 2;
-        ctx.shadowOffsetY = 2;
-        ctx.shadowBlur    = 10;
-        ctx.shadowColor   = config.colors.shadowColor;
-      };
-
+        ;
   /**
    * Sets a new value to gauge and updates the gauge view
    *
@@ -691,6 +685,12 @@ var Gauge = function( config) {
       rOut = max / 100 * 20,
       pad1 = max / 100 * 4,
       pad2 = max / 100 * 2
+      shad = function() {
+        ctx.shadowOffsetX = 2;
+        ctx.shadowOffsetY = 2;
+        ctx.shadowBlur    = 10;
+        ctx.shadowColor   = config.colors.shadowColor;
+      }
 
     ;
 
