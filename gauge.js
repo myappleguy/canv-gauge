@@ -539,7 +539,7 @@ var Gauge = function( config) {
           ;
 
       if (config.glow) {
-        ctx.shadowBlur  = d0;
+        ctx.shadowBlur  = 0.012 * max;
         //ctx.shadowColor = 'rgba(0, 0, 0, 0.5)';
         ctx.shadowColor = config.colors.shadowColor;
       }
