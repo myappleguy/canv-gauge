@@ -421,13 +421,14 @@ var Gauge = function( config) {
     ctx.fillStyle = config.colors.plate;
     ctx.fill();
 
+    ctx.save();
+
     if (config.glow) {
       ctx.shadowBlur  = d0;
       //ctx.shadowColor = 'rgba(0, 0, 0, 0.5)';
       ctx.shadowColor = config.colors.shadowColor;
     }
 
-    ctx.save();
   };
 
   /**
