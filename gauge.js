@@ -404,12 +404,6 @@ var Gauge = function( config) {
     ctx.fillStyle = lgrad( '#ddd', '#aaa', r0);
     ctx.fill();
 
-    if (config.glow) {
-      ctx.shadowBlur  = d0;
-      //ctx.shadowColor = 'rgba(0, 0, 0, 0.5)';
-      ctx.shadowColor = config.colors.shadowColor;
-    }
-
     ctx.restore();
 
     ctx.beginPath();
@@ -426,6 +420,12 @@ var Gauge = function( config) {
     ctx.arc( 0, 0, r3, 0, Math.PI * 2, true);
     ctx.fillStyle = config.colors.plate;
     ctx.fill();
+
+    if (config.glow) {
+      ctx.shadowBlur  = d0;
+      //ctx.shadowColor = 'rgba(0, 0, 0, 0.5)';
+      ctx.shadowColor = config.colors.shadowColor;
+    }
 
     ctx.save();
   };
