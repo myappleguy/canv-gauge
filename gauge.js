@@ -416,6 +416,12 @@ var Gauge = function( config) {
     ctx.fillStyle = lgrad( '#eee', '#f0f0f0', r2);
     ctx.fill();
 
+    if (config.glow) {
+      ctx.shadowBlur  = d0;
+      //ctx.shadowColor = 'rgba(0, 0, 0, 0.5)';
+      ctx.shadowColor = config.colors.shadowColor;
+    }
+
     ctx.beginPath();
     ctx.arc( 0, 0, r3, 0, Math.PI * 2, true);
     ctx.fillStyle = config.colors.plate;
