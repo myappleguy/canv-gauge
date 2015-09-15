@@ -545,17 +545,18 @@ var Gauge = function( config) {
         p = rpoint( r, radians( a))
           ;
 
+      ctx.font      = 20 * (max / 200) + "px Arial";
+      ctx.fillStyle = config.colors.numbers;
+      ctx.lineWidth = 0;
+      ctx.textAlign = "center";
+      ctx.fillText( config.majorTicks[i], p.x, p.y + 3);
+
       if (config.glow) {
         ctx.shadowBlur  = 0.012 * max;
         //ctx.shadowColor = 'rgba(0, 0, 0, 0.5)';
         ctx.shadowColor = config.colors.shadowColor;
       }
 
-      ctx.font      = 20 * (max / 200) + "px Arial";
-      ctx.fillStyle = config.colors.numbers;
-      ctx.lineWidth = 0;
-      ctx.textAlign = "center";
-      ctx.fillText( config.majorTicks[i], p.x, p.y + 3);
     }
   };
 
