@@ -429,6 +429,7 @@ var Gauge = function( config) {
       ctx.shadowColor = config.colors.shadowColor;
     }
 
+    ctx.restore();
   };
 
   /**
